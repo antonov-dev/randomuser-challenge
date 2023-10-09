@@ -1,4 +1,4 @@
-# Envion Challenge
+# Randomuser Challenge
 
 ## Installation
 
