@@ -3,7 +3,7 @@
 ## Installation
 
 1. Clone repo
-2. Run `cd envion-challenge`
+2. Run `cd randomuser-challenge`
 3. Copy `.env.example` to `.env`
 4. Run `docker run --rm \
    -u "$(id -u):$(id -g)" \
