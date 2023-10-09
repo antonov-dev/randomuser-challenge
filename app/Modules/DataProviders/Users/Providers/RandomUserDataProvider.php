@@ -3,6 +3,7 @@
 namespace App\Modules\DataProviders\Users\Providers;
 
 use App\Modules\DataProviders\Users\DataProviderUser;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
@@ -16,14 +17,19 @@ class RandomUserDataProvider implements UserDataProvider
 
     /**
      * RandomUserDataProvider construct
+     * @throws Exception
      */
-    protected function __construct()
+    public function __construct()
     {
         $this->url = config('services.user_data_providers.randomuser.url');
+
+        if(empty($this->url)) {
+            throw new Exception('RandomUserDataProvider not configured');
+        }
     }
 
     /** @inheritDoc */
-    public function get(int $count = 10): array
+    public function get(int $count = 10, bool $asArray = true): array
     {
         $results = [];
 
@@ -41,7 +47,7 @@ class RandomUserDataProvider implements UserDataProvider
                 $user->setEmail(Arr::get($result, 'email'));
                 $user->setPhone(Arr::get($result, 'phone'));
 
-                $results[] = $user;
+                $results[] = $asArray ? $user->toArray() : $user;
             }
         }
 

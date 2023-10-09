@@ -143,4 +143,19 @@ class DataProviderUser
     {
         $this->country = $country;
     }
+
+    /**
+     * Return array representation of user instance
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'full_name' => $this->getFullName(),
+            'last_name' => $this->getLastName(),
+            'phone' => $this->getPhone(),
+            'email' => $this->getEmail(),
+            'country' => $this->getCountry()
+        ];
+    }
 }
